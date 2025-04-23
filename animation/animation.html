@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container" class="container"></div>
+
+
+
+<style>
+html{
+  background: black;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.container{
+  height: 700px;
+  width: 700px;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+}
+.square{
+    height: 94%;
+    width: 94%;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -47% 0 0 -47%;
+}
+
+.black{ 
+  background: black;  
+  animation: rotate 20s infinite linear; 
+}
+
+@keyframes rotate{
+  0%{ transform: rotate(0deg); }
+	100%{ transform: rotate(360deg); }	
+}
+
+
+</style>
+
+
+
+<script>
+    function createNestedDivs(n, targetId) {
+        if (n <= 0) return;
+    
+        const container = document.createElement('div');
+        container.classList.add('square','black');
+        let currentDiv = container;
+    
+        for (let i = 2; i < n; i++) {
+            const newDiv = document.createElement('div');
+            newDiv.classList.add('square');
+            if (i % 2 === 1) {
+                newDiv.classList.add('black');
+            }
+            currentDiv.appendChild(newDiv);
+            currentDiv = newDiv;
+        }
+    
+
+        const newDiv = document.createElement('div');
+            newDiv.classList.add('square','black');
+            currentDiv.appendChild(newDiv);
+            currentDiv = newDiv;
+
+        const target = document.getElementById(targetId);
+        if (target) {
+            target.appendChild(container);
+        } else {
+            console.warn(`Target with id "${targetId}" not found.`);
+        }
+    }
+
+
+createNestedDivs(42, 'container');
+
+
+
+</script>
+</body>
+</html>
